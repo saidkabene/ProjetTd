@@ -16,17 +16,19 @@ import td3.Soustraction;
  */
 public class AppTest {
 
+
 	@Test
 	public void simpleSum() {
 
 		ConstEntiere neuf = new ConstEntiere(9);
 		ConstEntiere deux = new ConstEntiere(2);
 		Addition racine = new Addition(neuf, deux);
+		
 
 		assertEquals(11, ((ConstEntiere) racine.simplifier()).getEntier());
 
 	}
-
+  
 	@Test
 	public void classExample() {
 
@@ -46,22 +48,40 @@ public class AppTest {
 
 	}
 	
+	
+	
+	
+
+	
 	@Test
 	public void exempleCalculer() {
 
 		ExpressionArithmetique neuf = new ConstEntiere(9);
 		ExpressionArithmetique deux = new ConstEntiere(2);
 		ExpressionArithmetique trois = new ConstEntiere(3);
+		
+		
 		ExpressionArithmetique cr = new ConstRationnelle(1, 17);
-
+		System.out.println(cr.calculer());
+		
+		
 		ExpressionArithmetique plus = new Addition(neuf, deux);
+		System.out.println(  plus.calculer() );
+		
 		ExpressionArithmetique minus = new Soustraction(trois, cr);
+		System.out.println(  minus.calculer()) ;
+		
 		ExpressionArithmetique times = new Multiplication(plus, minus);
+		System.out.println( "addition" +times.calculer() );
+		
 
 		ExpressionArithmetique results = new ConstRationnelle(550, 17);
 
 		
 		assertEquals(550/17.0, times.calculer(),0.00001);
+		
 
 	}
+	
+
 }

@@ -21,4 +21,10 @@ public final class ConstEntiere implements ExpressionArithmetique {
 	public double calculer() {
 		return this.getEntier();
 	}
+
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

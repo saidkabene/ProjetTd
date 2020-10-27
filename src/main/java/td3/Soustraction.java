@@ -36,4 +36,10 @@ public class Soustraction extends OperationBinaire {
 				1 * droite.getDenominateur()).simplifier();
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -38,4 +38,10 @@ public class Division extends OperationBinaire {
 		return this;
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

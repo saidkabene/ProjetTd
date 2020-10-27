@@ -1,6 +1,6 @@
 package td3;
 
-public final class ConstRationnelle implements ExpressionArithmetique {
+public final class ConstRationnelle extends OperationBinaire implements ExpressionArithmetique {
 
 	@Override
 	public String toString() {
@@ -8,6 +8,7 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	}
 
 	public ConstRationnelle(int num, int denom) {
+		super();
 		this.numerateur = num;
 		this.denominateur = denom;
 	}
@@ -36,9 +37,16 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 			return gcd(b, a % b);
 	}
 
+	
+	
 	@Override
 	public double calculer() {
-		return 0.0;
+		return eaLeft.calculer() /eaRight.calculer() ;
+	}
+
+	@Override
+	public String afficher() {
+		return null;
 	}
 
 }

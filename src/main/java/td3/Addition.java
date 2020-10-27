@@ -36,4 +36,10 @@ public class Addition extends OperationBinaire {
 		return simplifie(droite, gauche).simplifier();
 	}
 
+	@Override
+	public String afficher() {
+		
+		return this.eaLeft.afficher() + this.eaRight.afficher()	;
+	}
+
 }
