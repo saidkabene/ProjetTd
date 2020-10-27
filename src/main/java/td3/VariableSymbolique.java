@@ -2,11 +2,11 @@ package td3;
 
 public class VariableSymbolique implements ExpressionArithmetique{
 
-	private char value ;
+	private String x ;
 	
-	public VariableSymbolique(char x) {
+	public VariableSymbolique(String x) {
 		super();
-		this.value = x;
+		this.x=(x);
 	}
 
 	@Override
@@ -15,20 +15,18 @@ public class VariableSymbolique implements ExpressionArithmetique{
 		return this;
 	}
 
-	@Override
-	public double calculer() {
-		
-		return this.getValue();
-	}
 
 	@Override
 	public String afficher() {
 
-		return null;
+		return this.x;
 	}
 
-	public char getValue() {
-		return value;
+	@Override
+	public double calculer() {
+
+		return 0;
 	}
+
 
 }

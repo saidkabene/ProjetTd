@@ -3,12 +3,12 @@ package td3;
 public abstract class operationUnaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique eaLeft;
 	
+	
 
-	public operationUnaire(ExpressionArithmetique eaLeft) {
+	public operationUnaire(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		this.eaLeft = eaLeft;
-		
+	
 	}
-
 
 	protected ExpressionArithmetique simplifie(ConstanteSymbolique gauche) {
 		return this;
@@ -21,7 +21,6 @@ public abstract class operationUnaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche) {
 		return this;
 	}
-
 	protected ExpressionArithmetique simplifie(ConstRationnelle droite) {
 		return this;
 	}
@@ -64,7 +63,6 @@ public abstract class operationUnaire implements ExpressionArithmetique {
 		return res;
 
 	}
-
 
 
 }

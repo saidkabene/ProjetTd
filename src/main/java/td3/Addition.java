@@ -35,11 +35,34 @@ public class Addition extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return simplifie(droite, gauche).simplifier();
 	}
-
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VariableSymbolique droite) {
+		return simplifie(gauche.simplifier(), droite);
+	}
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle gauche ,VariableSymbolique droite) {
+		return simplifie(gauche.simplifier(), droite);
+		
+	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(VariableSymbolique gauche ,ConstRationnelle droite) {
+		return simplifie(droite.simplifier(),gauche );
+		
+	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(VariableSymbolique gauche ,ConstEntiere droite) {
+		return simplifie( droite.simplifier(),gauche);
+		
+	}
+	
+	
 	@Override
 	public String afficher() {
 		
-		return this.eaLeft.afficher() + this.eaRight.afficher()	;
+		return this.eaLeft.afficher() + "+" + this.eaRight.afficher()	;
 	}
 
 }

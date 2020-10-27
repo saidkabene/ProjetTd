@@ -35,11 +35,29 @@ public class Soustraction extends OperationBinaire {
 		return new ConstRationnelle(droite.getDenominateur() * gauche.getEntier() - droite.getNumerateur() * 1,
 				1 * droite.getDenominateur()).simplifier();
 	}
-
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche , VariableSymbolique droite) {
+		return simplifie(gauche.simplifier(), droite);		
+	}
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle gauche , VariableSymbolique droite) {
+		return simplifie(gauche.simplifier(), droite);	
+	}
+	@Override
+	protected ExpressionArithmetique simplifie(VariableSymbolique gauche , ConstEntiere droite) {
+		return simplifie( droite.simplifier(),gauche);
+		
+	}
+	@Override
+	protected ExpressionArithmetique simplifie(VariableSymbolique gauche , ConstRationnelle droite) {
+		return simplifie(droite.simplifier(),gauche );
+		
+	}
+	
 	@Override
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.eaLeft.afficher() + "-" + this.eaRight.afficher();
 	}
 
 }

@@ -5,6 +5,9 @@ public final class ConstEntiere implements ExpressionArithmetique {
 	public ConstEntiere(int value) {
 		this.entier = value;
 	}
+	public ConstEntiere(int value, VariableSymbolique x ) {
+		this.entier = value;
+	}
 
 	public int getEntier() {
 		return entier;
@@ -24,7 +27,7 @@ public final class ConstEntiere implements ExpressionArithmetique {
 
 	@Override
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return  String.valueOf(entier);
 	}
 }
