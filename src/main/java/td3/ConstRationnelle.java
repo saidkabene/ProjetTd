@@ -41,10 +41,8 @@ public final class ConstRationnelle  implements ExpressionArithmetique {
 	
 	@Override
 	public double calculer() {
-		return (double) getNumerateur() / getDenominateur()  ;
+	return this.getNumerateur() / this.getDenominateur() ;
 	}
-
-
 
 	@Override
 	public String afficher() {

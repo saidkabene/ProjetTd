@@ -8,10 +8,7 @@ public class Addition extends OperationBinaire {
 
 	}
 
-	@Override
-	public double calculer() {
-		return this.eaLeft.calculer() + this.eaRight.calculer();
-	}
+	
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
@@ -57,12 +54,44 @@ public class Addition extends OperationBinaire {
 		return simplifie( droite.simplifier(),gauche);
 		
 	}
+	@Override
 	
+	protected ExpressionArithmetique simplifie(cos gauche ,VariableSymbolique droite) {
+		return new cos( droite,gauche.simplifier());
+		
+	}
+	
+	@Override
+	public double calculer()  {
+			try {
+				return this.eaLeft.calculer() + this.eaRight.calculer();
+			
+		} catch (NumberFormatException e ) {
+			 System.out.println("le resultat" +"  " + calculerWithVar(this.eaLeft,this.eaRight)+"  "+"est correcte mais on ne peut pas calculer la valiableSymbolique" );
+	
+		}
+			return Double.valueOf(calculerWithVar(this.eaLeft,this.eaRight));
+			
+	}
+	
+	public String calculerWithVar(ExpressionArithmetique x,ExpressionArithmetique y) {
+		return new StringBuilder().
+					append(x.simplifier().afficher()).
+					append("+").
+					append(y.simplifier().afficher()).toString();
+	}
+
 	
 	@Override
 	public String afficher() {
 		
+	
 		return this.eaLeft.afficher() + "+" + this.eaRight.afficher()	;
+	}
+	public String toString() {
+		
+		
+		return this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() ;
 	}
 
 }

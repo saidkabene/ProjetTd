@@ -44,6 +44,19 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		return this;
 		
 	}
+	protected ExpressionArithmetique simplifie(cos gauche ,ConstEntiere droite) {
+		return simplifie(gauche, droite.simplifier());
+		
+	}
+	protected ExpressionArithmetique simplifie(cos gauche, ConstRationnelle droite) {
+		return this;
+	}
+	protected ExpressionArithmetique simplifie(cos gauche, VariableSymbolique droite) {
+		return this;
+	}
+	protected ExpressionArithmetique simplifie( VariableSymbolique droite) {
+		return this;
+	}
 
 	@Override
 	public ExpressionArithmetique simplifier() {
@@ -86,7 +99,7 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
 			VariableSymbolique droite = (VariableSymbolique) this.eaRight;
 
-			res = simplifie(gauche, droite);
+			res = simplifie(gauche.simplifier() , droite);
 
 		}
 		else if (this.eaLeft instanceof VariableSymbolique && this.eaRight instanceof ConstEntiere) {
@@ -103,7 +116,8 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			res = simplifie(gauche, droite);
 
 		}
-
+	
+		
 		else {
 			res = this;
 		}
@@ -112,4 +126,10 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 
 	}
 
-}
+
+	
+
+
+	
+	}
+

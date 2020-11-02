@@ -2,12 +2,18 @@ package td3;
 
 public abstract class operationUnaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique eaLeft;
-	
-	
 
-	public operationUnaire(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
-		this.eaLeft = eaLeft;
 	
+	public ExpressionArithmetique getEaLeft() {
+		return eaLeft;
+	}
+
+
+
+
+
+	public operationUnaire (ExpressionArithmetique eaLeft) {
+		this.eaLeft = eaLeft;
 	}
 
 	protected ExpressionArithmetique simplifie(ConstanteSymbolique gauche) {
@@ -15,6 +21,11 @@ public abstract class operationUnaire implements ExpressionArithmetique {
 	}
 
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche) {
+		return this;
+		
+	}
+	
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche) {
 		return this;
 	}
 
@@ -24,6 +35,7 @@ public abstract class operationUnaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstRationnelle droite) {
 		return this;
 	}
+	
 
 	@Override
 	public ExpressionArithmetique simplifier() {
@@ -55,6 +67,14 @@ public abstract class operationUnaire implements ExpressionArithmetique {
 			res = simplifie(gauche);
 
 		}
+		else if (this.eaLeft instanceof Puissance) {
+			Puissance gauche = (Puissance) this.eaLeft;
+			
+
+			res = simplifie(gauche);
+
+		}
+		
 
 		else {
 			res = this;
@@ -63,6 +83,17 @@ public abstract class operationUnaire implements ExpressionArithmetique {
 		return res;
 
 	}
+
+
+
+
+
+	
+
+
+	
+
+	
 
 
 }

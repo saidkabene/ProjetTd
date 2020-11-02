@@ -23,15 +23,13 @@ public class Multiplication extends OperationBinaire {
 		return new ConstEntiere(gauche.getEntier() * droite.getEntier()).simplifier();
 	}
 
-	
-
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return this.simplifie(droite, gauche).simplifier();
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VariableSymbolique droite) {
-		return this.simplifie( gauche.simplifier(),droite);
+		return this.simplifie(gauche.simplifier(), droite);
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, VariableSymbolique droite) {
@@ -45,16 +43,27 @@ public class Multiplication extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche, ConstRationnelle droite) {
 		return this.simplifie(droite.simplifier(), gauche);
 	}
+	@Override
+	protected ExpressionArithmetique simplifie(cos gauche, ConstRationnelle droite) {
+		return this.simplifie(gauche,droite.simplifier());
+	}
 
 	@Override
 	public double calculer() {
-	return this.eaLeft.calculer() * this.eaRight.calculer();
+
+		return this.eaLeft.calculer() * this.eaRight.calculer();
 	}	
 
 	@Override
 	public String afficher() {
 		
-		return this.eaLeft.calculer() + this.eaRight.afficher();
+		return this.eaLeft.afficher() +"*"+ this.eaRight.afficher();
+		
+	}
+	
+	public String toString() {
+		
+		return this.eaLeft.simplifier().afficher() + "*" + this.eaRight.simplifier().afficher() ;
 	}
 
 }

@@ -1,19 +1,24 @@
 package td3;
 
+
+
 public class VariableSymbolique implements ExpressionArithmetique{
 
+	
 	private String x ;
+
 	
 	public VariableSymbolique(String x) {
 		super();
-		this.x=(x);
+		this.x=x;
 	}
-
+	
 	@Override
 	public ExpressionArithmetique simplifier() {
 	
-		return this;
+	return this;
 	}
+
 
 
 	@Override
@@ -23,10 +28,17 @@ public class VariableSymbolique implements ExpressionArithmetique{
 	}
 
 	@Override
-	public double calculer() {
-
-		return 0;
+	public double  calculer() {
+		
+		
+		return Double.valueOf(x);
+	
 	}
 
 
+
+
+
+
+	
 }

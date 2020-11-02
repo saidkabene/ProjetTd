@@ -8,7 +8,7 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() {
+	public double calculer()   {
 		return this.eaLeft.calculer() - this.eaRight.calculer();
 	}
 
@@ -58,6 +58,10 @@ public class Soustraction extends OperationBinaire {
 	@Override
 	public String afficher() {
 		return this.eaLeft.afficher() + "-" + this.eaRight.afficher();
+	}
+	
+	public String toString() {
+		return this.eaLeft.simplifier().afficher() + "-" + this.eaRight.simplifier().afficher() ;
 	}
 
 }
