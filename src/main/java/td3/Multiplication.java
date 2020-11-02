@@ -37,6 +37,10 @@ public class Multiplication extends OperationBinaire {
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 1) {
+			
+			return gauche.simplifier();
+		}
 		return this.simplifie(droite.simplifier(), gauche);
 	}
 	@Override
@@ -62,7 +66,14 @@ public class Multiplication extends OperationBinaire {
 	}
 	
 	public String toString() {
-		
+		if (this.eaRight.calculer() == 1) {
+			
+			return eaLeft.simplifier().afficher();
+		}
+		else if (this.eaLeft.calculer() ==1) {
+			return eaRight.simplifier().afficher();
+			
+		}
 		return this.eaLeft.simplifier().afficher() + "*" + this.eaRight.simplifier().afficher() ;
 	}
 

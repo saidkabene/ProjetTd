@@ -7,13 +7,11 @@ public final class ConstRationnelle  implements ExpressionArithmetique {
 		return "ConstRationnelle [numerateur=" + numerateur + ", denominateur=" + denominateur + "]";
 	}
 
-	public ConstRationnelle(int num, int denom) {
-		this.numerateur = num;
-		this.denominateur = denom;
+	public ConstRationnelle(int d, int e) {
+		this.numerateur = d;
+		this.denominateur = e;
 	}
-
 	
-
 
 	public int getNumerateur() {
 		return numerateur;
@@ -41,12 +39,12 @@ public final class ConstRationnelle  implements ExpressionArithmetique {
 	
 	@Override
 	public double calculer() {
-	return this.getNumerateur() / this.getDenominateur() ;
+	return  (double )this.getNumerateur() / this.getDenominateur() ;
 	}
 
 	@Override
 	public String afficher() {
-		return String.valueOf(getNumerateur()/getDenominateur());
+		return getNumerateur()+ "/" +getDenominateur();
 	}
 
 }

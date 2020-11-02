@@ -10,6 +10,12 @@ public class Addition extends OperationBinaire {
 
 	
 
+	public Addition(int i, ExpressionArithmetique ver) {
+		super(ver, ver);
+	}
+
+
+
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
 		return new ConstRationnelle(gauche.getNumerateur() * droite.getEntier() + gauche.getDenominateur() * 1,
@@ -91,7 +97,7 @@ public class Addition extends OperationBinaire {
 	public String toString() {
 		
 		
-		return this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() ;
+		return this.eaLeft.afficher() + "+" + this.eaRight.afficher() ;
 	}
 
 }
