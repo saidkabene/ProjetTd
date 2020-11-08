@@ -38,7 +38,10 @@ public class Soustraction extends OperationBinaire {
 	
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche , VariableSymbolique droite) {
-		return simplifie(gauche.simplifier(), droite);		
+		if(gauche.calculer()== 0) {
+			return droite.simplifier();
+		}
+		return this.simplifie(gauche.simplifier(), droite);		
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche , VariableSymbolique droite) {
@@ -46,6 +49,9 @@ public class Soustraction extends OperationBinaire {
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche , ConstEntiere droite) {
+		if( droite.calculer()== 0) {
+			return gauche.simplifier();
+		}
 		return simplifie( droite.simplifier(),gauche);
 		
 	}
@@ -57,10 +63,27 @@ public class Soustraction extends OperationBinaire {
 	
 	@Override
 	public String afficher() {
+		
 		return this.eaLeft.afficher() + "-" + this.eaRight.afficher();
 	}
 	
 	public String toString() {
+		
+		if ( this.eaLeft instanceof ConstEntiere && this.eaRight instanceof VariableSymbolique) {
+			 if(this.eaLeft.calculer()==0) {
+
+				 return this.eaRight.afficher(); 
+			 	}
+		}
+		 else if (this.eaLeft instanceof VariableSymbolique && this.eaRight instanceof ConstEntiere) {
+		 		if(this.eaRight.calculer()== 0) {
+		 			
+		 			return this.eaLeft.afficher();
+	  		}
+			
+		}
+		
+		
 		return this.eaLeft.simplifier().afficher() + "-" + this.eaRight.simplifier().afficher() ;
 	}
 

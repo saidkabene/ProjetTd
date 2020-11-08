@@ -33,8 +33,8 @@ public class ConstanteSymbolique implements ExpressionArithmetique{
 	}
 	@Override
 	public ExpressionArithmetique simplifier() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this;
 	}
 	
 	

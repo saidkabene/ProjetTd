@@ -1,34 +1,63 @@
 package td3;
+
+import java.awt.RenderingHints.Key;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+
 	
-public class VariableSymbolique implements ExpressionArithmetique{
+public class VariableSymbolique  implements ExpressionArithmetique{
+	
+
 	private String x ;
-	Map<String, ExpressionArithmetique> value = new TreeMap<>();
-		
-	public VariableSymbolique(String x) {
+	Map<String, ExpressionArithmetique> value = new HashMap<>();
+	
+	public VariableSymbolique(ExpressionArithmetique s ) {
 		super();
+	}
+	public VariableSymbolique(String x) {
+	
 		this.x=(x);
+		
 	}
 		
 	public VariableSymbolique(Map<String, ExpressionArithmetique> value) {
-			
+		
 		this.value = value;
 	}
+	
 	@Override
 	public ExpressionArithmetique simplifier() {
-		
+	
 		return this;
 	}
+
+
+
 	@Override
 	public String afficher() {
-		return String.valueOf(this.x);
+		if(!value.isEmpty()) {
+			return value.toString();
+		}
+		return x;
 	}
+	
 	@Override
 	public double calculer() {
+		try {
+			Double.valueOf(x);
+		}catch(Exception e) {
 			
-		return Double.valueOf(x);
+		    System.out.print(x);
+		    return 1;
 		}
+		return Double.valueOf(x);
+	}
+
+	public String getX() {
+		return x;
+	}
+
+	
 	}
 	
 

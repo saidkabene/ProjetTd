@@ -55,6 +55,9 @@ public class Division extends OperationBinaire {
 	
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche ,ConstEntiere droite) {
+		if(droite.getEntier() == 1) {
+			return gauche.simplifier();
+		}
 		return simplifie( droite.simplifier(),gauche);
 		
 	}
@@ -62,12 +65,8 @@ public class Division extends OperationBinaire {
 	@Override
 	public String afficher() {
 		
-		return this.eaLeft.afficher()+"/"+ this.eaRight.afficher();
+		return this.eaLeft.simplifier().afficher()+"/"+ this.eaRight.simplifier().afficher();
 	}
-	
-	public String toString() {
-		
-		return this.eaLeft.simplifier().afficher() + "/" + this.eaRight.simplifier().afficher() ;
-	}
+
 
 }

@@ -2,12 +2,14 @@ package poo;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import td3.Addition;
 import td3.ConstEntiere;
@@ -109,7 +111,7 @@ public class AppTest {
 		ExpressionArithmetique add = new Addition(deux,var);
 		System.out.println(add.simplifier().afficher());
 		
-		assertEquals(add.toString(),add.simplifier().afficher());
+		assertEquals(add.afficher(),add.simplifier().afficher());
 		
 
 	}
@@ -183,7 +185,7 @@ public class AppTest {
 		 add2 = add2.simplifier();
 		 System.out.println(add2.toString());
 		 System.out.println(add2.simplifier().afficher());
-		 assertEquals(add2.toString(), add2.simplifier().afficher());
+		 assertEquals(add2.afficher(), add2.simplifier().afficher());
 		  
 	 }
 	 
@@ -223,7 +225,7 @@ public class AppTest {
 	
 	@Test
 	public void question8() {
-		Map<String, ExpressionArithmetique> tableau = new TreeMap<>();
+		Map<String, ExpressionArithmetique> tableau = new HashMap<>();
 		ExpressionArithmetique un = new ConstEntiere(1);
 		tableau.put("x", un);
 		tableau.put("y", un);
@@ -238,6 +240,7 @@ public class AppTest {
 		assertEquals(1.5,add2.calculer(),1e-4);
 		
 	}
+	
 	@Test
 	public void question9() {
 		
@@ -245,36 +248,123 @@ public class AppTest {
 		ExpressionArithmetique ver = new VariableSymbolique ("x");
 		
 		ExpressionArithmetique cons = new ConstRationnelle(1, 2);
-		System.out.println(cons.afficher());
+		
 		ExpressionArithmetique pi = new ConstanteSymbolique("pi");
 		ExpressionArithmetique cos = new cos(ver);
 		
 		ExpressionArithmetique mul = new Multiplication(cons, pi);
 		
 		ExpressionArithmetique add =  new Addition(cos,mul);
-		
-		System.out.println(add.afficher());
-		System.out.println(add.toString());
-		assertEquals(add.toString(),add.afficher());
+			
+		assertEquals(add.afficher(),add.simplifier().afficher());
 		
 	}
 	
 	@Test 
 	public void question15() {
 		
+		
 		ExpressionArithmetique 	a = new VariableSymbolique("x");
 		ExpressionArithmetique un = new ConstEntiere(1);
-		
 		ExpressionArithmetique mul = new Multiplication(a, un);
+		System.out.println(mul.simplifier().afficher());
+		assertEquals(a.afficher(), mul.simplifier().afficher());
+		
+		
+		ExpressionArithmetique zero = new ConstEntiere(0);
+		ExpressionArithmetique 	b = new VariableSymbolique("x");
+		ExpressionArithmetique add = new Addition(zero, b);
+		
+		assertEquals(add.afficher(),add.simplifier().afficher());
+		
+		ExpressionArithmetique z = new ConstEntiere(0);
+		ExpressionArithmetique c = new VariableSymbolique("x");
+		ExpressionArithmetique addz = new Soustraction(z, c);
+		System.out.println(addz.toString());
+		assertEquals(addz.toString(),addz.simplifier().afficher());
+		
+		ExpressionArithmetique e = new ConstEntiere(0);
+		ExpressionArithmetique f = new VariableSymbolique("x");
+		ExpressionArithmetique addf = new Soustraction(f, e);
+		System.out.println(addf.toString());
+		
+		assertEquals(addf.toString(),addf.simplifier().afficher());
+		
+		ExpressionArithmetique y = new VariableSymbolique("x");		
+		ExpressionArithmetique t = new ConstEntiere(1);
+		ExpressionArithmetique div =  new Division(y,t);
+		
+		System.out.println(div.simplifier().afficher());
+		assertEquals(y.afficher(), div.simplifier().afficher());
+		
+		ExpressionArithmetique cs = new ConstEntiere(0);
+		ExpressionArithmetique d = new VariableSymbolique("x");
+		ExpressionArithmetique k = new cos(d);
+		
+		System.out.println(k.simplifier().afficher());
+		
+		assertEquals(k.afficher(), k.simplifier().afficher());
+		
+		ExpressionArithmetique 	hhh = new VariableSymbolique("x");
+		ExpressionArithmetique  kkk = new ConstEntiere(5);
+		ExpressionArithmetique  mmm = new ConstEntiere(4);
+		ExpressionArithmetique  fff = new Soustraction(kkk, mmm);
+		ExpressionArithmetique  lll= new Multiplication(hhh,fff);
+		System.out.println(lll.simplifier().afficher());
+		assertEquals("x", lll.simplifier().afficher(), "x");
+		
+	}	
+	
+	@Test 
+	public void question16() {
+		
+		
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		
+		ExpressionArithmetique var  = new VariableSymbolique("x");
+		
+		ExpressionArithmetique cons = new ConstRationnelle(1,2);
+		
+
+		ExpressionArithmetique add = new Addition(var, cons);
+		
+		ExpressionArithmetique mul = new Multiplication(deux,add);
 		
 		System.out.println(mul.simplifier().afficher());
 		
-		assertEquals(mul.toString(), mul.simplifier().afficher());
 	}
-	
-	
-
-	
+	@Test 
+	public void  question17() {
+		
+		ExpressionArithmetique un = new ConstEntiere(1);
+		ExpressionArithmetique x = new VariableSymbolique("x");
+		ExpressionArithmetique add = new Addition(un , x);
+		
+		System.out.println(add.simplifier().afficher());
+		
+		ExpressionArithmetique mui = new Addition(un,add);
+		
+		System.out.println(mui.simplifier().afficher());
+		
+	}
+	@Test
+	public void question18() {
+		
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		ExpressionArithmetique cons = new ConstRationnelle(1,2);
+		
+		ExpressionArithmetique ver = new VariableSymbolique("x");
+		
+		ExpressionArithmetique mlk = new Multiplication(ver, cons);
+		System.out.println(mlk.simplifier().afficher());
+		ExpressionArithmetique qqq = new Multiplication(deux, mlk);
+		
+		System.out.println(qqq.simplifier().afficher());
+		
+		
+		
+		
+	}
 	
 	
 	/*
