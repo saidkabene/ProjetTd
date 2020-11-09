@@ -1,5 +1,7 @@
 package td3;
 
+import java.util.Map;
+
 public final class ConstEntiere implements ExpressionArithmetique {
 
 	public ConstEntiere(int value) {
@@ -21,7 +23,7 @@ public final class ConstEntiere implements ExpressionArithmetique {
 
 	
 	@Override
-	public double calculer() {
+	public double calculer(Map<String, ExpressionArithmetique> value) {
 		return this.getEntier();
 	}
 

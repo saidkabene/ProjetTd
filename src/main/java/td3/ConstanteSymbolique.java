@@ -1,5 +1,7 @@
 package td3;
 
+import java.util.Map;
+
 public class ConstanteSymbolique implements ExpressionArithmetique{
 
 	private String symb;
@@ -10,7 +12,7 @@ public class ConstanteSymbolique implements ExpressionArithmetique{
 		this.symb = symb;
 	}
 	
-	public double calculer() {
+	public double calculer(Map<String, ExpressionArithmetique> value) {
 		double res = 0;
 		if(this.symb == "pi") {
 			res = Math.PI;

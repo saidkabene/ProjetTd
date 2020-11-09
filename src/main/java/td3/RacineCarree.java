@@ -1,6 +1,8 @@
 package td3;
 
-public class RacineCarree extends operationUnaire {
+import java.util.Map;
+
+public class RacineCarree extends OperationUnaire {
 
 	public RacineCarree(ExpressionArithmetique eaLeft) {
 		super(eaLeft);
@@ -8,9 +10,9 @@ public class RacineCarree extends operationUnaire {
 	}
 
 	@Override
-	public double calculer() {
+	public double calculer(Map<String, ExpressionArithmetique> value) {
 		
-		return Math.sqrt(this.eaLeft.calculer());
+		return Math.sqrt(this.eaLeft.calculer(value));
 	}
 
 	@Override

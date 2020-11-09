@@ -1,6 +1,8 @@
 package td3;
 
-public class Puissance extends operationUnaire {
+import java.util.Map;
+
+public class Puissance extends OperationUnaire {
 
 	private ExpressionArithmetique eaRight;
 	
@@ -14,9 +16,9 @@ public class Puissance extends operationUnaire {
 	}
 
 	@Override
-	public double calculer() {
+	public double calculer(Map<String, ExpressionArithmetique> value) {
 		
-		return Math.pow(this.eaLeft.calculer(),this.eaRight.calculer());
+		return Math.pow(this.eaLeft.calculer(value),this.eaRight.calculer(value));
 	}
 
 	@Override
@@ -27,13 +29,9 @@ public class Puissance extends operationUnaire {
 	@Override
 	public ExpressionArithmetique simplifie(ExpressionArithmetique  gauche) {
 		System.out.println("qsf");
-		return new Puissance(eaLeft);
+		return this;
 		
 	}
 	
 	
-	public String toString() {
-		
-	return  Double.toString(this.calculer());
-	}
 }

@@ -1,5 +1,7 @@
 package td3;
 
+import java.util.Map;
+
 public class Multiplication extends OperationBinaire {
 
 	public Multiplication(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
@@ -21,7 +23,7 @@ public class Multiplication extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstEntiere droite) {
-		System.out.println("said");
+		
 		return new ConstEntiere(gauche.getEntier() * droite.getEntier()).simplifier();
 	}
 
@@ -75,10 +77,10 @@ public class Multiplication extends OperationBinaire {
 		*/
 		
 		
-		System.out.println(new ConstEntiere(gauche.calculer()* ((Addition)droite).eaRight.calculer()));
+		//System.out.println(new ConstEntiere(gauche.calculer() * ((Addition)droite).eaRight.calculer()));
+		//System.out.println(new ConstEntiere(gauche.calculer() * ((Addition)droite).eaLeft.calculer()));
 	
-
-		return droite.simplifier();
+		return this.simplifie(gauche,droite.simplifier()) ;
 	}
 	
 	
@@ -98,16 +100,16 @@ public class Multiplication extends OperationBinaire {
 		return this.simplifie(droite.simplifier(), gauche);
 	}
 	@Override
-	protected ExpressionArithmetique simplifie(cos gauche, ConstRationnelle droite) {
+	protected ExpressionArithmetique simplifie(Cos gauche, ConstRationnelle droite) {
 		return this.simplifie(gauche,droite.simplifier());
 	}
 
 	
 	
 	@Override
-	public double calculer() {
+	public double calculer(Map<String, ExpressionArithmetique> value) {
 		
-		return this.eaLeft.calculer() * this.eaRight.calculer();
+		return this.eaLeft.calculer(value) * this.eaRight.calculer(value);
 	}	
 
 	@Override

@@ -1,12 +1,14 @@
 package td3;
 
-public class cos extends operationUnaire {
+import java.util.Map;
+
+public class Cos extends OperationUnaire {
 	
-	public cos(ExpressionArithmetique eaLeft) {
+	public Cos(ExpressionArithmetique eaLeft) {
 		super(eaLeft);
 	}
 
-	public cos(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
+	public Cos(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		super(eaLeft);
 	}
 
@@ -20,14 +22,14 @@ public class cos extends operationUnaire {
 	
 	@Override
 	public ExpressionArithmetique simplifie(VariableSymbolique gauche) {
-		return new cos (gauche.simplifier());
+		return new Cos (gauche.simplifier());
 		
 	}
 	
 
 	@Override
 	public ExpressionArithmetique simplifie(ConstRationnelle gauche) {
-		return new cos (gauche.simplifier());
+		return new Cos (gauche.simplifier());
 		
 	}
 	
@@ -37,19 +39,17 @@ public class cos extends operationUnaire {
 	}
 
 	@Override
-	public double calculer()  {
+	public double calculer(Map<String, ExpressionArithmetique> value)  {
 			try {
-				return Math.cos(this.eaLeft.calculer());
+				return Math.cos(this.eaLeft.calculer(value));
 			
 		} catch (NumberFormatException e ) {
 			System.out.println("le resultat est "+"  "+ calculerWithVar(this)+"correcte mais on ne peut pas calculer la valiableSymbolique" );
 	
 		}
-			return Math.cos(this.eaLeft.calculer());
+			return Math.cos(this.eaLeft.calculer(value));
 			
 	}
-	
-	
 	
 	@Override
 	public String afficher() {

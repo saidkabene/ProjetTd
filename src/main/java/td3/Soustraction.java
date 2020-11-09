@@ -1,5 +1,7 @@
 package td3;
 
+import java.util.Map;
+
 public class Soustraction extends OperationBinaire {
 
 	public Soustraction(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
@@ -8,8 +10,8 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer()   {
-		return this.eaLeft.calculer() - this.eaRight.calculer();
+	public double calculer(Map<String, ExpressionArithmetique> value)   {
+		return this.eaLeft.calculer(value) - this.eaRight.calculer(value);
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class Soustraction extends OperationBinaire {
 	
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche , VariableSymbolique droite) {
-		if(gauche.calculer()== 0) {
+		if(gauche.getEntier()== 0) {
 			return droite.simplifier();
 		}
 		return this.simplifie(gauche.simplifier(), droite);		
@@ -49,7 +51,7 @@ public class Soustraction extends OperationBinaire {
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche , ConstEntiere droite) {
-		if( droite.calculer()== 0) {
+		if( droite.getEntier()== 0) {
 			return gauche.simplifier();
 		}
 		return simplifie( droite.simplifier(),gauche);
@@ -67,24 +69,6 @@ public class Soustraction extends OperationBinaire {
 		return this.eaLeft.afficher() + "-" + this.eaRight.afficher();
 	}
 	
-	public String toString() {
-		
-		if ( this.eaLeft instanceof ConstEntiere && this.eaRight instanceof VariableSymbolique) {
-			 if(this.eaLeft.calculer()==0) {
 
-				 return this.eaRight.afficher(); 
-			 	}
-		}
-		 else if (this.eaLeft instanceof VariableSymbolique && this.eaRight instanceof ConstEntiere) {
-		 		if(this.eaRight.calculer()== 0) {
-		 			
-		 			return this.eaLeft.afficher();
-	  		}
-			
-		}
-		
-		
-		return this.eaLeft.simplifier().afficher() + "-" + this.eaRight.simplifier().afficher() ;
-	}
 
 }

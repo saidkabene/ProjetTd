@@ -1,8 +1,10 @@
 package td3;
 
-public class ln extends operationUnaire{
+import java.util.Map;
 
-	public ln(ExpressionArithmetique eaLeft) {
+public class Ln extends OperationUnaire{
+
+	public Ln(ExpressionArithmetique eaLeft) {
 		super(eaLeft);
 	}
 
@@ -12,22 +14,22 @@ public class ln extends operationUnaire{
 	}
 	
 	@Override
-	public double calculer()  {
+	public double calculer(Map<String, ExpressionArithmetique> value)  {
 			try {
-				return Math.log(this.eaLeft.calculer());
+				return Math.log(this.eaLeft.calculer(value));
 			
 		} catch (NumberFormatException e ) {
 			System.out.println("le resultat est "+"  "+ calculerWithVar(this)+"correcte mais on ne peut pas calculer la valiableSymbolique" );
 	
 		}
-			return Math.log(this.eaLeft.calculer());
+			return Math.log(this.eaLeft.calculer(value));
 			
 	}
 	
 	@Override
 	public String afficher() {
 		
-		return "ln"+ this.eaLeft.simplifier().afficher();
+		return  this.eaLeft.simplifier().afficher();
 	}
 
 }

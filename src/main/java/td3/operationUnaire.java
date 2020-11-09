@@ -1,6 +1,6 @@
 package td3;
 
-public abstract class operationUnaire implements ExpressionArithmetique {
+public abstract class OperationUnaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique eaLeft;
 
 	
@@ -12,7 +12,7 @@ public abstract class operationUnaire implements ExpressionArithmetique {
 
 
 
-	public operationUnaire (ExpressionArithmetique eaLeft) {
+	public OperationUnaire (ExpressionArithmetique eaLeft) {
 		this.eaLeft = eaLeft;
 	}
 

@@ -42,15 +42,10 @@ public class VariableSymbolique  implements ExpressionArithmetique{
 	}
 	
 	@Override
-	public double calculer() {
-		try {
-			Double.valueOf(x);
-		}catch(Exception e) {
-			
-		    System.out.print(x);
-		    return 1;
-		}
-		return Double.valueOf(x);
+	public double calculer(Map<String, ExpressionArithmetique> value) {
+	
+			return value.get(x).calculer(value);
+	
 	}
 
 	public String getX() {

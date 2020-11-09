@@ -1,5 +1,7 @@
 package td3;
 
+import java.util.Map;
+
 public class Division extends OperationBinaire {
 
 	public Division(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
@@ -8,8 +10,8 @@ public class Division extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer()  {
-		return this.eaLeft.calculer() / this.eaRight.calculer();
+	public double calculer(Map<String, ExpressionArithmetique> value)  {
+		return this.eaLeft.calculer(value) / this.eaRight.calculer(value);
 	}
 
 	@Override
@@ -61,6 +63,13 @@ public class Division extends OperationBinaire {
 		return simplifie( droite.simplifier(),gauche);
 		
 	}
+	@Override
+	protected ExpressionArithmetique simplifie(Cos gauche ,VariableSymbolique droite) {
+		System.out.println("dsdsdsds");
+		return simplifie( droite.simplifier(),gauche);
+		
+	}
+
 
 	@Override
 	public String afficher() {

@@ -1,14 +1,16 @@
 package td3;
 
-public class sin extends operationUnaire{
+import java.util.Map;
+
+public class Sin extends OperationUnaire{
 	private String x ; 
 	
 	
-	public sin (ExpressionArithmetique eaLeft) {
+	public Sin (ExpressionArithmetique eaLeft) {
 		super(eaLeft);
 			
 	}
-	public sin(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
+	public Sin(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		super(eaLeft);
 	}
 
@@ -21,7 +23,7 @@ public class sin extends operationUnaire{
 	@Override
 	public ExpressionArithmetique simplifie(VariableSymbolique gauche) {
 		System.out.println("dqsd");
-		return new sin (gauche);
+		return new Sin (gauche);
 		
 	}
 	
@@ -34,15 +36,15 @@ public class sin extends operationUnaire{
 
 
 	@Override
-	public double calculer()  {
+	public double calculer(Map<String, ExpressionArithmetique> value)  {
 			try {
-				return Math.sin(this.eaLeft.calculer());
+				return Math.sin(this.eaLeft.calculer(value));
 			
 		} catch (NumberFormatException e ) {
 			 System.out.println("le resultat est "+"  "+ calculerWithVar(this.eaLeft)+"correcte mais on ne peut pas calculer la valiableSymbolique" );
 	
 		}
-			return Math.cos(this.eaLeft.calculer());
+			return Math.cos(this.eaLeft.calculer(value));
 			
 	}
 	
@@ -56,6 +58,7 @@ public class sin extends operationUnaire{
 	public String afficher() {
 		return "sin("+ this.eaLeft.afficher()+ ")";
 	}
+	
 	public String toString() {
 		
 		

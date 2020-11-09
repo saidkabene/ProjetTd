@@ -56,14 +56,14 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		return this;
 		
 	}
-	protected ExpressionArithmetique simplifie(cos gauche ,ConstEntiere droite) {
+	protected ExpressionArithmetique simplifie(Cos gauche ,ConstEntiere droite) {
 		return simplifie(gauche, droite.simplifier());
 		
 	}
-	protected ExpressionArithmetique simplifie(cos gauche, ConstRationnelle droite) {
+	protected ExpressionArithmetique simplifie(Cos gauche, ConstRationnelle droite) {
 		return this;
 	}
-	protected ExpressionArithmetique simplifie(cos gauche, VariableSymbolique droite) {
+	protected ExpressionArithmetique simplifie(Cos gauche, VariableSymbolique droite) {
 		return this;
 	}
 	

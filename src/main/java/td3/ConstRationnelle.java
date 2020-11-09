@@ -1,5 +1,7 @@
 package td3;
 
+import java.util.Map;
+
 public final class ConstRationnelle implements ExpressionArithmetique {
 
 	@Override
@@ -14,6 +16,7 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 		this.denominateur = e;
 	}
 	
+
 	public int getNumerateur() {
 		return numerateur;
 	}
@@ -39,7 +42,7 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	}
 
 	@Override
-	public double calculer() {
+	public double calculer(Map<String, ExpressionArithmetique> value) {
 		return (double) this.getNumerateur() / this.getDenominateur();
 	}
 
