@@ -16,12 +16,12 @@ public class Division extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
-		return new ConstRationnelle(gauche.getNumerateur(), gauche.getDenominateur() * droite.getEntier()).simplifier();
+		return new ConstRationnelle(gauche.getNumerateur(), (int) (gauche.getDenominateur() * droite.getEntier())).simplifier();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
-		return new ConstRationnelle(gauche.getEntier() * droite.getNumerateur(), droite.getDenominateur()).simplifier();
+		return new ConstRationnelle((int) (gauche.getEntier() * droite.getNumerateur()), droite.getDenominateur()).simplifier();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class Division extends OperationBinaire {
 	@Override
 	public String afficher() {
 		
-		return this.eaLeft.simplifier().afficher()+"/"+ this.eaRight.simplifier().afficher();
+		return "("+this.eaLeft.simplifier().afficher()+"/"+ this.eaRight.simplifier().afficher()+")";
 	}
 
 

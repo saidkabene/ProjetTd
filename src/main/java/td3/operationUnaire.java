@@ -9,9 +9,6 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 	}
 
 
-
-
-
 	public OperationUnaire (ExpressionArithmetique eaLeft) {
 		this.eaLeft = eaLeft;
 	}

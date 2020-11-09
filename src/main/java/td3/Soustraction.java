@@ -16,7 +16,7 @@ public class Soustraction extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
-		return new ConstRationnelle(gauche.getNumerateur() * droite.getEntier() - gauche.getDenominateur() * 1,
+		return new ConstRationnelle((int) (gauche.getNumerateur() * droite.getEntier() - gauche.getDenominateur() * 1),
 				1 * gauche.getDenominateur()).simplifier();
 	}
 
@@ -34,7 +34,7 @@ public class Soustraction extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
-		return new ConstRationnelle(droite.getDenominateur() * gauche.getEntier() - droite.getNumerateur() * 1,
+		return new ConstRationnelle((int) (droite.getDenominateur() * gauche.getEntier() - droite.getNumerateur() * 1),
 				1 * droite.getDenominateur()).simplifier();
 	}
 	

@@ -1,7 +1,10 @@
 
 package td3;
 
+import java.beans.beancontext.BeanContextServicesListener;
 import java.util.Map;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Addition extends OperationBinaire {
 
@@ -29,6 +32,7 @@ public class Addition extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstEntiere droite) {
+		
 		return new ConstEntiere(gauche.getEntier() + droite.getEntier()).simplifier();
 	}
 
@@ -60,20 +64,23 @@ public class Addition extends OperationBinaire {
 		return this.simplifie(gauche,droite.simplifier()) ;
 		
 	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche ,Addition droite) {
+	
+		return new Addition(new Addition(gauche, droite.eaLeft),droite.eaRight).simplifier();
+		
+	}
 	
 	@Override
-	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ExpressionArithmetique droite) {
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Ln droite) {
+		System.out.println("dgsd");
+	
+	if(droite.calculer(null)== 0) {
+		return gauche.simplifier();
+	}	
 		
-		if (gauche instanceof ConstEntiere && ((Addition) droite).eaLeft.simplifier() instanceof ConstEntiere &&((Addition) droite).eaRight.simplifier() instanceof VariableSymbolique ) {
-		//	System.out.println(((ConstEntiere) gauche).getEntier()+((Addition) droite).eaLeft.calculer() +"+" +((Addition)droite).eaRight.simplifier().afficher())  ;
-			System.out.println("llll");
-		}
-		if (gauche instanceof ConstEntiere && ((Addition) droite).eaLeft.simplifier() instanceof ConstRationnelle &&((Addition) droite).eaRight.simplifier() instanceof VariableSymbolique ) {
-			System.out.println("llll");
-		}
-		System.out.println("kkkkkkk");
-		return droite.simplifier();
-		
+		return  new ConstEntiere((int) (gauche.getEntier()+ ((Ln)droite).eaLeft.calculer(null)));	
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche, ConstEntiere droite) {
@@ -112,7 +119,7 @@ public class Addition extends OperationBinaire {
 	public String afficher() {
 		
 	
-		return this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher()	;
+		return "("+this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() + ")"	;
 	}
 	
 		

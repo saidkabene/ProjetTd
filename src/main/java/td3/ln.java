@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class Ln extends OperationUnaire{
 
+	public Ln(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
+		super(eaLeft);
+	}
 	public Ln(ExpressionArithmetique eaLeft) {
 		super(eaLeft);
 	}
@@ -12,17 +15,16 @@ public class Ln extends OperationUnaire{
 		return new StringBuilder().
 					append(x.simplifier().afficher()).toString();
 	}
+	@Override
+	public ExpressionArithmetique simplifie(ConstRationnelle gauche) {
+		return this.simplifie (gauche.simplifier());
+		
+	}
 	
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value)  {
-			try {
+		
 				return Math.log(this.eaLeft.calculer(value));
-			
-		} catch (NumberFormatException e ) {
-			System.out.println("le resultat est "+"  "+ calculerWithVar(this)+"correcte mais on ne peut pas calculer la valiableSymbolique" );
-	
-		}
-			return Math.log(this.eaLeft.calculer(value));
 			
 	}
 	
@@ -31,5 +33,9 @@ public class Ln extends OperationUnaire{
 		
 		return  this.eaLeft.simplifier().afficher();
 	}
+	
+
+
+
 
 }

@@ -31,6 +31,9 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	public ExpressionArithmetique simplifier() {
 		
 		int pgcd = gcd(this.numerateur, this.denominateur);
+		if (this.numerateur == this.denominateur) {
+			return new ConstEntiere(1);
+		}
 		return new ConstRationnelle(this.numerateur / pgcd, this.denominateur / pgcd);
 	}
 
@@ -48,7 +51,7 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 
 	@Override
 	public String afficher() {
-		return getNumerateur() + "/" + getDenominateur();
+		return "("+getNumerateur() + "/" + getDenominateur()+")";
 	}
 
 }

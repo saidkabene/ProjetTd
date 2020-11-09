@@ -10,11 +10,6 @@ public final class ConstEntiere implements ExpressionArithmetique {
 	
 
 
-	public ConstEntiere(double d) {
-		this.entier = (int) d;
-	}
-
-
 	public int getEntier() {
 		return entier;
 	}

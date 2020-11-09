@@ -92,10 +92,11 @@ public class AppTest {
 		
 		
 		
-		assertEquals(8, addd.calculer(null),1e-4);
+		assertEquals(8, ((ConstRationnelle) addd.simplifier()).getNumerateur());
 		
 		ExpressionArithmetique aaa  = new Soustraction (trois,cinq);
-		assertEquals(-2,aaa.calculer(null) ,1e-4);
+		
+		assertEquals(-2/1, ((ConstRationnelle) aaa.simplifier()).getNumerateur());
 		
 		ExpressionArithmetique lum  = new Multiplication(trois,cinq);
 		assertEquals(15, lum.calculer(null), 1e-4);
@@ -258,19 +259,24 @@ public class AppTest {
 		
 		ExpressionArithmetique add =  new Addition(cos,mul);
 		
-		assertEquals("Cos(x)+1/2*π",add.simplifier().afficher());
+		assertEquals("(Cos(x)+((1/2)*π))",add.simplifier().afficher());
 		
 	}
+	
 	@Test 
 	public void question10() {
 		
-		ExpressionArithmetique un = new ConstEntiere(1);
+		ExpressionArithmetique un = new ConstEntiere(3);
+		ExpressionArithmetique deux = new ConstEntiere(2);
 		ExpressionArithmetique zz = new Ln(un);
-		ExpressionArithmetique add = new Addition(un,zz);
+		ExpressionArithmetique add = new Addition(deux,new Ln(un));
 		
 		System.out.println(add.simplifier().afficher());
-		assertEquals(1.0, add.calculer(null),1e-4);
+		
+		assertEquals("4.0986",add.simplifier().afficher());
 	}
+	
+	
 	@Test 
 	public void question15() {
 		
@@ -335,13 +341,13 @@ public class AppTest {
 		ExpressionArithmetique var  = new VariableSymbolique("x");
 		
 		ExpressionArithmetique cons = new ConstRationnelle(1,2);
-		
-
+	
 		ExpressionArithmetique add = new Addition(var, cons);
 		
 		ExpressionArithmetique mul = new Multiplication(deux,add);
 		
-		System.out.println(mul.simplifier().afficher());
+		assertEquals("((2*x)+1)",mul.simplifier().afficher() );
+		;
 		
 	}
 	@Test 
@@ -351,12 +357,23 @@ public class AppTest {
 		ExpressionArithmetique x = new VariableSymbolique("x");
 		ExpressionArithmetique add = new Addition(un , x);
 		
-		System.out.println(add.simplifier().afficher());
+		
 		
 		ExpressionArithmetique mui = new Addition(un,add);
-		
+		assertEquals("(2+x)", mui.simplifier().afficher());
 		System.out.println(mui.simplifier().afficher());
+	}
+		@Test
+		public void question17_1() {
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		ExpressionArithmetique cons =  new ConstRationnelle(1,2);
 		
+		ExpressionArithmetique v = new VariableSymbolique("x");
+		
+		ExpressionArithmetique mul = new Multiplication(cons, v);
+		ExpressionArithmetique mlk = new Multiplication(deux,mul);
+		
+		assertEquals("x", mlk.simplifier().afficher());
 	}
 	@Test
 	public void question18() {
@@ -371,9 +388,7 @@ public class AppTest {
 		ExpressionArithmetique qqq = new Multiplication(deux, mlk);
 		
 		System.out.println(qqq.simplifier().afficher());
-		
-		
-		
+			
 		
 	}
 	
