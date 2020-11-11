@@ -65,7 +65,21 @@ public class Division extends OperationBinaire {
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(Cos gauche ,VariableSymbolique droite) {
-		System.out.println("dsdsdsds");
+		
+		return simplifie( droite.simplifier(),gauche);
+		
+	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ConstanteSymbolique gauche ,ConstEntiere droite) {
+		
+		if( ((ConstanteSymbolique)gauche).getSymb() == "pi") {
+
+			return new ConstEntiere((int) ( 3.14 / droite.getEntier()));
+			
+		}
+		
+		
 		return simplifie( droite.simplifier(),gauche);
 		
 	}

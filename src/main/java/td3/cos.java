@@ -40,13 +40,7 @@ public class Cos extends OperationUnaire {
 
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value)  {
-			try {
-				return Math.cos(this.eaLeft.calculer(value));
-			
-		} catch (NumberFormatException e ) {
-			System.out.println("le resultat est "+"  "+ calculerWithVar(this)+"correcte mais on ne peut pas calculer la valiableSymbolique" );
-	
-		}
+		
 			return Math.cos(this.eaLeft.calculer(value));
 			
 	}

@@ -33,6 +33,9 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstRationnelle droite) {
 		return this;
 	}
+	protected ExpressionArithmetique simplifie(Puissance gauche) {
+		return this;
+	}
 	
 
 	@Override
@@ -48,7 +51,7 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 			res = simplifie (gauche);
 		} else if (this.eaLeft instanceof ConstRationnelle ) {
 			ConstRationnelle gauche = (ConstRationnelle) this.eaLeft;
-			;
+			
 
 			res = simplifie(gauche);
 
@@ -59,7 +62,7 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 			res = simplifie(gauche);
 
 		}else if (this.eaLeft instanceof VariableSymbolique) {
-			System.out.println();
+		
 			VariableSymbolique gauche = (VariableSymbolique) this.eaLeft;
 			
 
@@ -68,6 +71,13 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		}
 		else if (this.eaLeft instanceof Puissance) {
 			Puissance gauche = (Puissance) this.eaLeft;
+			
+
+			res = simplifie(gauche);
+
+		}
+		else if (this.eaLeft instanceof Ln) {
+			Ln gauche = (Ln) this.eaLeft;
 			
 
 			res = simplifie(gauche);

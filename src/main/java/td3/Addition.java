@@ -74,13 +74,15 @@ public class Addition extends OperationBinaire {
 	
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Ln droite) {
-		System.out.println("dgsd");
-	
-	if(droite.calculer(null)== 0) {
-		return gauche.simplifier();
-	}	
 		
-		return  new ConstEntiere((int) (gauche.getEntier()+ ((Ln)droite).eaLeft.calculer(null)));	
+		if (droite.eaLeft instanceof ConstEntiere ) {	
+			if(((ConstEntiere)droite.eaLeft).getEntier()==1) {
+			
+				return gauche.simplifier();
+		}	
+	}
+		
+		return  new Addition(gauche, droite);	
 	}
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche, ConstEntiere droite) {
@@ -97,32 +99,24 @@ public class Addition extends OperationBinaire {
 		return new Cos( droite,gauche.simplifier());
 		
 	}
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Puissance droite) {
+      
+		return  droite;
+    }
 	
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value)  {
-		
 				
-				return this.eaLeft.calculer(value) + this.eaRight.calculer(value);
+		return this.eaLeft.calculer(value) + this.eaRight.calculer(value);
 				
-			
 		} 
-	
-	public String calculerWithVar(ExpressionArithmetique x,ExpressionArithmetique y) {
-		return new StringBuilder().
-					append(x.simplifier().afficher()).
-					append("+").
-					append(y.simplifier().afficher()).toString();
-	}
-
-	
+		
 	@Override
 	public String afficher() {
-		
 	
 		return "("+this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() + ")"	;
 	}
-	
-		
 		
 	}
 

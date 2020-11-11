@@ -16,13 +16,20 @@ public class Sin extends OperationUnaire{
 
 	@Override
 	public ExpressionArithmetique simplifie(ConstEntiere gauche) {
+		if(gauche.getEntier() == 1) {
+		
+			return new ConstEntiere(1);
+		}
+		if(Math.sin(gauche.getEntier())% 1 == 0) {
+			return new ConstEntiere((int) Math.sqrt(gauche.getEntier()));
+		}
 		return  this.simplifie( gauche.simplifier());
 				
 	}
 	
 	@Override
 	public ExpressionArithmetique simplifie(VariableSymbolique gauche) {
-		System.out.println("dqsd");
+		
 		return new Sin (gauche);
 		
 	}
@@ -37,13 +44,7 @@ public class Sin extends OperationUnaire{
 
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value)  {
-			try {
-				return Math.sin(this.eaLeft.calculer(value));
-			
-		} catch (NumberFormatException e ) {
-			 System.out.println("le resultat est "+"  "+ calculerWithVar(this.eaLeft)+"correcte mais on ne peut pas calculer la valiableSymbolique" );
 	
-		}
 			return Math.cos(this.eaLeft.calculer(value));
 			
 	}

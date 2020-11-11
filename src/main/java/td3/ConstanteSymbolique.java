@@ -22,6 +22,10 @@ public class ConstanteSymbolique implements ExpressionArithmetique{
 		return res;
 	}
 	
+	public String getSymb() {
+		return symb;
+	}
+
 	@Override
 	public String afficher() {
 		

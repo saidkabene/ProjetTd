@@ -16,8 +16,9 @@ public class Ln extends OperationUnaire{
 					append(x.simplifier().afficher()).toString();
 	}
 	@Override
-	public ExpressionArithmetique simplifie(ConstRationnelle gauche) {
-		return this.simplifie (gauche.simplifier());
+	public ExpressionArithmetique simplifie(ConstEntiere gauche) {
+			
+		return new Ln (gauche.simplifier());
 		
 	}
 	
@@ -31,7 +32,7 @@ public class Ln extends OperationUnaire{
 	@Override
 	public String afficher() {
 		
-		return  this.eaLeft.simplifier().afficher();
+		return "ln("+ this.eaLeft.simplifier().afficher()+")";
 	}
 	
 

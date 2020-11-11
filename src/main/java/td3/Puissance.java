@@ -15,6 +15,14 @@ public class Puissance extends OperationUnaire {
 		this.eaRight= eaRight;
 	}
 
+	public ExpressionArithmetique getEaRight() {
+		return eaRight;
+	}
+
+	public void setEaRight(ExpressionArithmetique eaRight) {
+		this.eaRight = eaRight;
+	}
+
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value) {
 		
@@ -27,8 +35,8 @@ public class Puissance extends OperationUnaire {
 	}
 	
 	@Override
-	public ExpressionArithmetique simplifie(ExpressionArithmetique  gauche) {
-		System.out.println("qsf");
+	public ExpressionArithmetique simplifie(ConstEntiere  gauche) {
+		
 		return this;
 		
 	}

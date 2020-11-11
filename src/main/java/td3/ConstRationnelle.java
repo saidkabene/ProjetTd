@@ -34,6 +34,9 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 		if (this.numerateur == this.denominateur) {
 			return new ConstEntiere(1);
 		}
+		if (this.denominateur == 1) {
+			return new ConstEntiere(this.numerateur);
+		}
 		return new ConstRationnelle(this.numerateur / pgcd, this.denominateur / pgcd);
 	}
 

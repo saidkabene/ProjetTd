@@ -2,6 +2,7 @@ package poo;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.TrayIcon;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -266,15 +267,45 @@ public class AppTest {
 	@Test 
 	public void question10() {
 		
-		ExpressionArithmetique un = new ConstEntiere(3);
+		ExpressionArithmetique un = new ConstEntiere(1);
 		ExpressionArithmetique deux = new ConstEntiere(2);
 		ExpressionArithmetique zz = new Ln(un);
-		ExpressionArithmetique add = new Addition(deux,new Ln(un));
+		ExpressionArithmetique add = new Addition(deux,zz);
+		assertEquals("2",add.simplifier().afficher());
 		
-		System.out.println(add.simplifier().afficher());
+		ExpressionArithmetique cinq = new ConstEntiere(5);
+		ExpressionArithmetique cos = new ConstEntiere(2);
+		ExpressionArithmetique zzz = new Ln(cinq);
+		ExpressionArithmetique addd = new Addition(cos,zzz);
+		assertEquals("(2+ln(5))", addd.simplifier().afficher());
 		
-		assertEquals("4.0986",add.simplifier().afficher());
-	}
+		ExpressionArithmetique n = new ConstEntiere(1);
+		ExpressionArithmetique z = new ConstEntiere(0);
+		ExpressionArithmetique v = new ConstanteSymbolique("e");
+		ExpressionArithmetique p = new Puissance(v, z);
+		ExpressionArithmetique d = new Addition(n, p);
+		
+		System.out.println(d.simplifier().afficher());
+		
+		
+		ExpressionArithmetique u = new ConstEntiere(1);
+		ExpressionArithmetique deuxx = new ConstEntiere(2);
+		ExpressionArithmetique pi = new ConstanteSymbolique("pi");
+		ExpressionArithmetique div = new Division(pi, deuxx);
+		ExpressionArithmetique sinn = new Sin(div);
+		ExpressionArithmetique ads = new Addition(u, sinn);
+		assertEquals("2",ads.simplifier().afficher());
+		
+		ExpressionArithmetique quatre = new ConstEntiere(4);
+		ExpressionArithmetique rc = new RacineCarree(quatre);
+		assertEquals("2",rc.simplifier().afficher());
+		
+		ExpressionArithmetique trois = new ConstEntiere(3);
+		ExpressionArithmetique rcc = new RacineCarree(trois);
+		assertEquals("√3",rcc.simplifier().afficher());
+	
+	
+}
 	
 	
 	@Test 

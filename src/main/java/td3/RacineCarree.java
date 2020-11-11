@@ -18,9 +18,15 @@ public class RacineCarree extends OperationUnaire {
 	@Override
 	public String afficher() {
 		
-		return "sqrt" + this.eaLeft.simplifier().afficher();
+		return "√" + this.eaLeft.simplifier().afficher();
 	}
-	
-	
+	@Override
+	public ExpressionArithmetique simplifie(ConstEntiere gauche) {
+			if(Math.sqrt(gauche.getEntier())% 1 == 0) {
+				return new ConstEntiere((int) Math.sqrt(gauche.getEntier()));
+			}
+		return this.simplifie(gauche.simplifier());
+			
+	}
 
 }
