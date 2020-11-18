@@ -32,6 +32,19 @@ public class Ln extends OperationUnaire{
 		
 		return "ln("+ this.eaLeft.simplifier().afficher()+")";
 	}
+	@Override
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this.getClass().equals(obj.getClass())) {
+            Ln cons1 = (Ln) this;
+            Ln cons2 = (Ln) obj;
+            if (cons1.eaLeft == cons2.eaLeft) {
+                res = true;
+            }
+        }
+        return res;
+
+    }
 	
 
 

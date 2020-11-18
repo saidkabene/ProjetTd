@@ -17,13 +17,11 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Addition droite) {
 		return this;
 	}
-	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstanteSymbolique droite) {
-		return this;
-	}
 	
-	protected ExpressionArithmetique simplifie(ConstanteSymbolique droite, ConstRationnelle gauche) {
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Division droite) {
 		return this;
 	}
+
 
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
 		return this;
@@ -59,10 +57,15 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
 		return this;
 	}
-	protected ExpressionArithmetique simplifie(ConstanteSymbolique gauche, ConstEntiere droite) {
+	
+	protected ExpressionArithmetique simplifie(Addition gauche,Multiplication droite) {
 		return this;
 	}
-	
+	protected ExpressionArithmetique simplifie(Puissance gauche, Puissance droite) {
+
+		return this;
+	}
+
 	protected ExpressionArithmetique simplifie(Cos gauche ,ConstEntiere droite) {
 		return simplifie(gauche, droite.simplifier());
 		
@@ -77,10 +80,7 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Puissance droite) {
 		return this;
 	}
-	protected ExpressionArithmetique simplifie(Sin gauche, Division droite) {
 	
-		return this;
-	}
 
 	
 	
@@ -185,42 +185,50 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			res = this.simplifie(gauche, droite);
 
 		}
-		else if (this.eaLeft instanceof Multiplication && this.eaRight instanceof ConstEntiere) {
-			Multiplication gauche = (Multiplication) this.eaLeft;
-			ConstEntiere droite = (ConstEntiere) this.eaRight;
+		else if (this.eaLeft instanceof Addition && this.eaRight instanceof Multiplication) {
+			Addition gauche = (Addition) this.eaLeft;
+			Multiplication droite = (Multiplication) this.eaRight;
 			
 			res = this.simplifie(gauche, droite);
 
 		}
-	
+		else if (this.eaLeft instanceof ConstEntiere && this.eaRight instanceof Division) {
 			
-		
+			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
+			Division droite = (Division) this.eaRight;
+			
+			res = this.simplifie(gauche, droite);
+
+		}else if (this.eaLeft instanceof Puissance && this.eaRight instanceof Puissance) {
+            Puissance gauche = (Puissance) this.eaLeft;
+            Puissance droite = (Puissance) this.eaRight;
+
+        res = this.simplifie(gauche, droite);
+
+    }
+
 		
 		else {
 			res = this;
 		}
 
 		return res;
-
 	}
+	@Override
+    public boolean equals(Object obj) {
+        if (this.getClass().equals(obj.getClass())) {
+            OperationBinaire op = (OperationBinaire)obj;
+                if(this.eaLeft.simplifier().getClass().equals(op.eaLeft.simplifier().getClass())
+                        && this.eaRight.simplifier().getClass().equals(op.eaRight.simplifier().getClass())) {
 
+                    if (this.eaLeft.simplifier().equals(op.eaLeft.simplifier()) && this.eaRight.simplifier().equals(op.eaRight.simplifier())) {
+                        return true;
+                    }
+                }
 
-
-
-
-	protected ExpressionArithmetique simplifie(Multiplication gauche, ConstEntiere droite) {
-	
-		return this;
-	}
-
-
-
-	
-
-
-	
-
-
+            }
+        return false;
+        }
 	
 	}
 

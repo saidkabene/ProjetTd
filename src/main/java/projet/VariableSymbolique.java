@@ -47,7 +47,19 @@ public class VariableSymbolique  implements ExpressionArithmetique{
 	public String getX() {
 		return x;
 	}
-
+	
+	@Override
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this.getClass().equals(obj.getClass())) {
+            VariableSymbolique var1 = (VariableSymbolique) this;
+            VariableSymbolique var2 = (VariableSymbolique) obj;
+            if (var1.getX() == var2.getX()) {
+                res = true;
+            }
+        }
+        return res;
+    }
 	
 	}
 	

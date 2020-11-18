@@ -55,5 +55,17 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	public String afficher() {
 		return "("+getNumerateur() + "/" + getDenominateur()+")";
 	}
+	@Override
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this.getClass().equals(obj.getClass())) {
+            ConstRationnelle cons1 = (ConstRationnelle) this;
+            ConstRationnelle cons2 = (ConstRationnelle) obj;
+            if (cons1.getNumerateur() == cons2.getNumerateur() && cons1.getDenominateur() == cons2.getDenominateur()) {
+                res = true;
+            }
+        }
+        return res;
+    }
 
 }

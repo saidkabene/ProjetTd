@@ -13,27 +13,37 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		this.eaLeft = eaLeft;
 	}
 
-
+	protected ExpressionArithmetique simplifie(ConstRationnelle c) {
+		
+		return this;
+	}
 
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche) {
 		return this;
 		
 	}
-	
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche) {
 		return this;
+		
 	}
+	protected ExpressionArithmetique simplifie(Puissance p) {
+		
+		return this;
+	}
+	protected ExpressionArithmetique simplifie(Multiplication p) {
+		
+		return this;
+	}
+	
+	
+	
 
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche) {
 		return this;
 	}
 	
-	protected ExpressionArithmetique simplifie(ConstRationnelle droite) {
-		return this;
-	}
-	protected ExpressionArithmetique simplifie(Puissance gauche) {
-		return this;
-	}
+
+
 	public ExpressionArithmetique simplifie(Division gauche) {	
 		return this;
 	}
@@ -51,7 +61,8 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		if (this.eaLeft instanceof ConstEntiere) {
 			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
 			
-			res = simplifie (gauche);
+		
+		res = simplifie (gauche);
 		} else if (this.eaLeft instanceof ConstRationnelle ) {
 			ConstRationnelle gauche = (ConstRationnelle) this.eaLeft;
 			
@@ -91,12 +102,24 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 			res = simplifie(gauche);
 
 		}else if (this.eaLeft instanceof Multiplication) {
-			Multiplication gauche = (Multiplication) this.eaLeft;
-		
-			
-			res = simplifie(gauche);
-
+            Multiplication m = (Multiplication) this.eaLeft;
+            if(m.eaLeft instanceof ConstEntiere && m.eaRight instanceof Puissance) {
+                m.eaRight = ((Puissance) m.eaRight).simplifier();
+            }else if(m.eaLeft instanceof ConstEntiere && m.eaRight instanceof VariableSymbolique) {
+                m.eaLeft = ((ConstEntiere) m.eaLeft);
+                m.eaRight = (VariableSymbolique) m.eaRight;
+            }
+            res = simplifie(m);
 		}
+		else if (this.eaLeft instanceof Puissance) {
+            Puissance p = (Puissance) this.eaLeft;
+            if(p.eaLeft instanceof VariableSymbolique && p.eaRight instanceof ConstEntiere) {
+                p.eaLeft = (VariableSymbolique) p.eaLeft;
+                p.eaRight = (ConstEntiere) p.eaRight;
+            }
+            res = simplifie(p);
+
+        }
 		
 		
 
@@ -107,6 +130,11 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		return res;
 
 	}
+
+
+
+
+
 
 
 

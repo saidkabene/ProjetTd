@@ -31,12 +31,7 @@ public class Cos extends OperationUnaire {
 	}
 	
 
-	@Override
-	public ExpressionArithmetique simplifie(ConstRationnelle gauche) {
-	
-		return new Cos (gauche.simplifier());
-		
-	}
+
 	@Override
 	public ExpressionArithmetique simplifie(Division gauche) {
 		
@@ -98,12 +93,18 @@ public class Cos extends OperationUnaire {
 		
 		return "Cos("+this.eaLeft.afficher()+")";
 	}
-
-	public String toString() {
-		
-		
-		return this.eaLeft.simplifier().afficher()  ;
-	}
+	@Override
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this.getClass().equals(obj.getClass())) {
+            Cos cons1 = (Cos) this;
+            Cos cons2 = (Cos) obj;
+            if (cons1.eaLeft == cons2.eaLeft) {
+                res = true;
+            }
+        }
+        return res;
+    }
 	
 	
 

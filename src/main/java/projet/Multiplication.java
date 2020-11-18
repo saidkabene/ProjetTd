@@ -63,25 +63,23 @@ public class Multiplication extends OperationBinaire {
 	
 		return new Addition(new Multiplication(gauche, droite.eaLeft),new Multiplication(gauche, droite.eaRight).simplifier()) ;
 	}
+	@Override
+    protected ExpressionArithmetique simplifie(Puissance gauche, Puissance droite) {
+    
+            return new Puissance(gauche.eaLeft,new Addition(gauche.getEaRight(),droite.getEaRight()).simplifier());
+       
+     
+    }
 
 	
-	
-	@Override
-	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstanteSymbolique droite) {
-		
-		return this.simplifie(gauche.simplifier(), droite);
-	}
+
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
 	
 		return new Multiplication( new Multiplication(gauche, droite.eaLeft),droite.eaRight.simplifier()).simplifier();
 	}
-	@Override
-	protected ExpressionArithmetique simplifie(ConstanteSymbolique droite, ConstRationnelle gauche) {
-	
-		return this.simplifie(droite, gauche.simplifier());
-	}
+
 	
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche, ConstRationnelle droite) {
@@ -99,11 +97,16 @@ public class Multiplication extends OperationBinaire {
 	}	
 
 	@Override
-	public String afficher() {
-		
-		return "("+this.eaLeft.simplifier().afficher() +"*"+ this.eaRight.simplifier().afficher()+")";
-		
-	}
-	
+    public String afficher() {
+    
+        if (this.eaLeft instanceof Multiplication || this.eaLeft instanceof Puissance || this.eaLeft instanceof VariableSymbolique) {
+            
+            return this.eaLeft.simplifier().afficher() +"*"+ this.eaRight.simplifier().afficher();
 
+        }
+        
+       
+        return "("+this.eaLeft.simplifier().afficher() +"*"+ this.eaRight.simplifier().afficher()+")";
+	
+	}
 }

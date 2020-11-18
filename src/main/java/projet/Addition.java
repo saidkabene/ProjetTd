@@ -10,10 +10,9 @@ public class Addition extends OperationBinaire {
 
 	}
 
-	
-
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
+		
 		return new ConstRationnelle(gauche.getNumerateur() * droite.getEntier() + gauche.getDenominateur() * 1,
 				1 * gauche.getDenominateur()).simplifier();
 	}
@@ -28,17 +27,20 @@ public class Addition extends OperationBinaire {
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstEntiere droite) {
 		
+
+		
 		return new ConstEntiere(gauche.getEntier() + droite.getEntier()).simplifier();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
-				
-		return new ConstRationnelle(gauche.getEntier() * droite.getNumerateur(), droite.getDenominateur()).simplifier();
+		
+		return new ConstRationnelle((gauche.getEntier() * droite.getDenominateur() )+ droite.getNumerateur(), droite.getDenominateur());
 		}
 	
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VariableSymbolique droite) {
+		
 		if(gauche.getEntier() ==0 ) {
 			return droite.simplifier();
 		}
@@ -60,6 +62,12 @@ public class Addition extends OperationBinaire {
 		
 	}
 
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche ,Division droite) {
+	
+		return new Addition(new Addition(gauche, droite.eaLeft),droite.eaRight).simplifier();
+		
+	}
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche ,Addition droite) {
 	
@@ -84,6 +92,7 @@ public class Addition extends OperationBinaire {
 			
 			return gauche.simplifier();
 		}
+		
 		return this.simplifie(droite.simplifier(), gauche);
 	}
 	
@@ -98,6 +107,11 @@ public class Addition extends OperationBinaire {
 		
 		return  this.simplifie(gauche, droite.simplifier());
     }
+	@Override
+	protected ExpressionArithmetique simplifie(Addition gauche, Multiplication droite) {
+		
+		return  this.simplifie(gauche, droite.simplifier());
+    }
 	
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value)  {
@@ -108,7 +122,10 @@ public class Addition extends OperationBinaire {
 		
 	@Override
 	public String afficher() {
-	
+		if( this.eaLeft instanceof Addition && this.eaRight instanceof Multiplication ) {
+			
+			return this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() 	;
+		}
 		return "("+this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() + ")"	;
 	}
 		

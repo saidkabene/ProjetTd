@@ -31,9 +31,16 @@ public final class ConstEntiere implements ExpressionArithmetique {
 		return this;
 	}
 	@Override
-	public String toString() {
-		return String.valueOf(entier);
-	}
-	
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this.getClass().equals(obj.getClass())) {
+            ConstEntiere cons1 = (ConstEntiere) this;
+            ConstEntiere cons2 = (ConstEntiere) obj;
+            if (cons1.getEntier() == cons2.getEntier()) {
+                res = true;
+            }
+        }
+        return res;
+    }
 	
 }

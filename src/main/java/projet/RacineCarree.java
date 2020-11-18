@@ -8,6 +8,14 @@ public class RacineCarree extends OperationUnaire {
 		super(eaLeft);
 
 	}
+	@Override
+	public ExpressionArithmetique simplifie(ConstEntiere gauche) {
+			if(Math.sqrt(gauche.getEntier())% 1 == 0) {
+				return new ConstEntiere((int) Math.sqrt(gauche.getEntier()));
+			}
+		return this.simplifie(gauche.simplifier());
+			
+	}
 
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value) {
@@ -20,13 +28,18 @@ public class RacineCarree extends OperationUnaire {
 			
 		return "√" + this.eaLeft.simplifier().afficher();
 	}
+	
 	@Override
-	public ExpressionArithmetique simplifie(ConstEntiere gauche) {
-			if(Math.sqrt(gauche.getEntier())% 1 == 0) {
-				return new ConstEntiere((int) Math.sqrt(gauche.getEntier()));
-			}
-		return this.simplifie(gauche.simplifier());
-			
-	}
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this.getClass().equals(obj.getClass())) {
+            RacineCarree cons1 = (RacineCarree) this;
+            RacineCarree cons2 = (RacineCarree) obj;
+            if (cons1.eaLeft == cons2.eaLeft) {
+                res = true;
+            }
+        }
+        return res;
+    }
 
 }

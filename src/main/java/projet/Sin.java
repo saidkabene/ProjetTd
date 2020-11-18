@@ -37,13 +37,6 @@ public class Sin extends OperationUnaire{
 		
 	}
 	
-
-	@Override
-	public ExpressionArithmetique simplifie(ConstRationnelle gauche) {
-		
-		return this.simplifie (gauche.simplifier());
-		
-	}
 	@Override
 	public ExpressionArithmetique simplifie(Division gauche) {
 		
@@ -81,17 +74,28 @@ public class Sin extends OperationUnaire{
 			}else if(deux.getEntier() == 3 && pii.getSymb().equals("pi") && entierr.getEntier()==4 ) {
 				
 				return new Division(new RacineCarree(new ConstEntiere(2)), new ConstEntiere(2));
-				
-				
+						
 			} else if(deux.getEntier() == 5 && pii.getSymb().equals("pi") && entierr.getEntier()==6 ) {
 				
 				return new Division(new ConstEntiere(1), new ConstEntiere(2));	
 			} 
 				
-		  }
+	   }
 		return new Sin( new Division(gauche.eaLeft, gauche.eaRight));
 		
 	}
+	@Override
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this.getClass().equals(obj.getClass())) {
+            Sin cons1 = (Sin) this;
+            Sin cons2 = (Sin) obj;
+            if (cons1.eaLeft == cons2.eaLeft) {
+                res = true;
+            }
+        }
+        return res;
+}
 	
 	@Override
 	public double calculer(Map<String, ExpressionArithmetique> value)  {
