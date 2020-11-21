@@ -98,7 +98,7 @@ public class Sin extends OperationUnaire{
 }
 	
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value)  {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value)  {
 	
 			return Math.sin(this.eaLeft.calculer(value));
 			

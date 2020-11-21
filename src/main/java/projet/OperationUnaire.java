@@ -34,6 +34,7 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		
 		return this;
 	}
+
 	
 	
 	
@@ -47,7 +48,9 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 	public ExpressionArithmetique simplifie(Division gauche) {	
 		return this;
 	}
-	
+	public ExpressionArithmetique simplifie(Addition gauche) {	
+		return this;
+	}
 
 	
 
@@ -63,7 +66,14 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 			
 		
 		res = simplifie (gauche);
-		} else if (this.eaLeft instanceof ConstRationnelle ) {
+		}
+		else if (this.eaLeft instanceof Division) {
+			Division gauche = (Division) this.eaLeft;
+			
+			res = simplifie(gauche);
+
+		}
+		 else if (this.eaLeft instanceof ConstRationnelle ) {
 			ConstRationnelle gauche = (ConstRationnelle) this.eaLeft;
 			
 
@@ -90,15 +100,17 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 			res = simplifie(gauche);
 
 		}
-		else if (this.eaLeft instanceof Ln) {
-			Ln gauche = (Ln) this.eaLeft;
+		else if (this.eaLeft instanceof Addition) {
+			Addition gauche = (Addition) this.eaLeft;
 			
 
 			res = simplifie(gauche);
 
-		}else if (this.eaLeft instanceof Division) {
-			Division gauche = (Division) this.eaLeft;
+		}
+		else if (this.eaLeft instanceof Ln) {
+			Ln gauche = (Ln) this.eaLeft;
 			
+
 			res = simplifie(gauche);
 
 		}else if (this.eaLeft instanceof Multiplication) {
@@ -121,8 +133,6 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 
         }
 		
-		
-
 		else {
 			res = this;
 		}

@@ -10,7 +10,7 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value)   {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value)   {
 		return this.eaLeft.calculer(value) - this.eaRight.calculer(value);
 	}
 
@@ -66,7 +66,7 @@ public class Soustraction extends OperationBinaire {
 	@Override
 	public String afficher() {
 		
-		return this.eaLeft.afficher() + "-" + this.eaRight.afficher();
+		return "("+ this.eaLeft.afficher() + "-" + this.eaRight.afficher() +")";
 	}
 	
 

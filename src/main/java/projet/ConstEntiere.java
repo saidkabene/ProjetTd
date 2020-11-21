@@ -16,7 +16,7 @@ public final class ConstEntiere implements ExpressionArithmetique {
 
 	
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
 		return this.getEntier();
 	}
 

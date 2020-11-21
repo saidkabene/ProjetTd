@@ -18,7 +18,7 @@ public class RacineCarree extends OperationUnaire {
 	}
 
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
 		
 		return Math.sqrt(this.eaLeft.calculer(value));
 	}

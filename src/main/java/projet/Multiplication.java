@@ -37,6 +37,7 @@ public class Multiplication extends OperationBinaire {
 	}
 	@Override
       protected ExpressionArithmetique simplifie(ConstEntiere gauche, VariableSymbolique droite) {
+		
 		if (gauche.getEntier() == 1) {
 			
 			return droite.simplifier();
@@ -61,7 +62,14 @@ public class Multiplication extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Addition droite) {
 	
 	
-		return new Addition(new Multiplication(gauche, droite.eaLeft),new Multiplication(gauche, droite.eaRight).simplifier()) ;
+		return new Addition(new Multiplication(gauche, droite.eaLeft),new Multiplication(gauche, droite.eaRight).simplifier());
+	}
+	@Override
+
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Soustraction droite) {
+	
+	
+		return new Soustraction(new Multiplication(gauche, droite.eaLeft),new Multiplication(gauche, droite.eaRight).simplifier());
 	}
 	@Override
     protected ExpressionArithmetique simplifie(Puissance gauche, Puissance droite) {
@@ -84,14 +92,14 @@ public class Multiplication extends OperationBinaire {
 	@Override
 	protected ExpressionArithmetique simplifie(VariableSymbolique gauche, ConstRationnelle droite) {
 		
-		return this.simplifie(droite.simplifier(), gauche);
+		return this.simplifie(droite, gauche).simplifier();
 	}
 	
 
 	
 	
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
 		
 		return this.eaLeft.calculer(value) * this.eaRight.calculer(value);
 	}	

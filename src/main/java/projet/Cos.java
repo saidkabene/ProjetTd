@@ -7,10 +7,12 @@ public class Cos extends OperationUnaire {
 	public Cos(ExpressionArithmetique eaLeft) {
 		super(eaLeft);
 	}
-
-	public Cos(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
+	
+	public Cos(ExpressionArithmetique eaLeft,ExpressionArithmetique eaRight) {
 		super(eaLeft);
 	}
+
+
 
 	@Override
 	public ExpressionArithmetique simplifie(ConstEntiere gauche) {
@@ -82,7 +84,7 @@ public class Cos extends OperationUnaire {
 
 
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value)  {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value)  {
 		
 			return Math.cos(this.eaLeft.calculer(value));
 			

@@ -23,6 +23,7 @@ public class Puissance extends OperationUnaire {
 	}
 	@Override
 	public ExpressionArithmetique simplifie(ConstEntiere droite) {
+		
 		if (droite.getEntier() == 0) {
 			return new ConstEntiere(1);
 		}
@@ -32,7 +33,7 @@ public class Puissance extends OperationUnaire {
 	} 
 
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
 		
 		return Math.pow(this.eaLeft.calculer(value),this.eaRight.calculer(value));
 	}

@@ -18,6 +18,7 @@ import projet.ConstRationnelle;
 import projet.ConstanteSymbolique;
 import projet.Cos;
 import projet.Derivation;
+import projet.Distibutivite;
 import projet.Division;
 import projet.ExpressionArithmetique;
 import projet.Factorisation;
@@ -94,13 +95,10 @@ public class AppTest {
 		ExpressionArithmetique cinq = new ConstRationnelle(10,2);
 		
 		ExpressionArithmetique addd  = new Addition (trois,cinq);
-		
-		
-	
 		assertEquals("8", addd.simplifier().afficher());
 		
-		ExpressionArithmetique aaa  = new Soustraction (trois,cinq);
 		
+		ExpressionArithmetique aaa  = new Soustraction (trois,cinq);	
 		assertEquals("-2", aaa.simplifier().afficher());
 		
 		ExpressionArithmetique lum  = new Multiplication(trois,cinq);
@@ -109,6 +107,7 @@ public class AppTest {
 		ExpressionArithmetique dic  = new Division(trois,cinq);
 		assertEquals("(3/5)", dic.simplifier().afficher());
 	}
+	
 	@Test
 	public void question2(){
 		
@@ -234,26 +233,18 @@ public class AppTest {
 
 	
 	
-	@Test
-	public void question8() {
-		Map<String, ExpressionArithmetique> tableau = new HashMap<>();
-		ExpressionArithmetique un = new ConstEntiere(1);
-		tableau.put("x", un);
-		tableau.put("y", un);
-		ExpressionArithmetique x = new VariableSymbolique(tableau);
-		ExpressionArithmetique y = new VariableSymbolique(tableau);
-		
-		System.out.println(y.afficher());
-		
-		ExpressionArithmetique add1 = new Addition(tableau.get("y"),un);
-		ExpressionArithmetique div = new Division(tableau.get("x"),add1);
-	
-		ExpressionArithmetique add2 = new Addition(un,div);
-		System.out.println(add2.simplifier().afficher());
-		
-		assertEquals("(3/2)",add2.simplifier().afficher());
-		
-	}
+		 @Test
+			public void question8() {
+				Map<VariableSymbolique, ExpressionArithmetique> map = new HashMap<>();
+				ExpressionArithmetique un = new ConstEntiere(1);
+				map.put(new VariableSymbolique("x"), un);
+				map.put(new VariableSymbolique("y"), un);
+				ExpressionArithmetique add1 = new Addition(new VariableSymbolique("y"),un);
+				ExpressionArithmetique div = new Division(new VariableSymbolique("x"),add1);
+				ExpressionArithmetique add2 = new Addition(un,div);
+				assertEquals(1.5,add2.calculer(map),1e-4);
+				
+			}
 	
 	@Test
 	public void question9() {
@@ -304,7 +295,7 @@ public class AppTest {
 		ExpressionArithmetique div = new Division(pi, deuxx);
 		ExpressionArithmetique sinn = new Sin(div);
 		ExpressionArithmetique ads = new Addition(u, sinn);
-	
+		System.out.println(ads.simplifier().afficher());
 		assertEquals("2",ads.simplifier().afficher());
 		
 
@@ -335,15 +326,14 @@ public class AppTest {
 		ExpressionArithmetique d = new VariableSymbolique("α");
 		
 		ExpressionArithmetique y = new VariableSymbolique("x");
-		ExpressionArithmetique p = new Puissance(y, new VariableSymbolique("i"));
-		ExpressionArithmetique b = new Multiplication(d,p);
-		ExpressionArithmetique s = new Somme(b,1,10);
+		ExpressionArithmetique b = new Multiplication(d,y);
+		ExpressionArithmetique s = new Somme(b,1,4);
 		
 		System.out.println(s.simplifier().afficher());
 		
 
 		
-	}
+	} 
 	
 	@Test 
 	public void question12() {
@@ -353,6 +343,7 @@ public class AppTest {
 		ExpressionArithmetique m = new Multiplication(y, x);
         ExpressionArithmetique s = new Produit(m,0,4);
         System.out.println(s.afficher());
+        assertEquals("α0*α1*α2*α3*α4*x^10", s.simplifier().afficher());
     }
 	
 	@Test 
@@ -380,7 +371,8 @@ public class AppTest {
 	        ExpressionArithmetique add2  = new Addition(d3,d4);
 	        ExpressionArithmetique add3  = new Addition(add1,add2);
 	        ExpressionArithmetique add4  = new Addition(add3,d5);
-	        System.out.println(add4.simplifier().afficher());
+	        System.out.println();
+	        assertEquals("((120*x)+24)", add4.simplifier().afficher());
 	    }
 	@Test
     public void question13() {
@@ -397,8 +389,8 @@ public class AppTest {
         ExpressionArithmetique d3    = new Derivation(dix);
         ExpressionArithmetique add1  = new Addition(d1,d2);
         ExpressionArithmetique add2  = new Addition(add1,d3);
-        System.out.println(add2.simplifier().afficher());
-
+       
+        assertEquals("((6*x)+5)", add2.simplifier().afficher());
     }
 	
 	@Test 
@@ -455,46 +447,54 @@ public class AppTest {
 		assertEquals("x", lll.simplifier().afficher());
 		
 	}	
-	
+	// supporter la distributivit´e du produit sur l’addition et la soustraction.
 	@Test 
 	public void question16() {
 		
 		
 		ExpressionArithmetique deux = new ConstEntiere(2);
-		
-		ExpressionArithmetique var  = new VariableSymbolique("x");
-		
+		ExpressionArithmetique var  = new VariableSymbolique("x");	
 		ExpressionArithmetique cons = new ConstRationnelle(1,2);
-	
 		ExpressionArithmetique add = new Addition(var, cons);
-		
 		ExpressionArithmetique mul = new Multiplication(deux,add);
+		ExpressionArithmetique ex = new Distibutivite(mul);
+		System.out.println(ex.simplifier().afficher());
+		assertEquals("((2*x)+1)",ex.simplifier().afficher() );//2*(x+1/2)=2x+1
 		
-		assertEquals("((2*x)+1)",mul.simplifier().afficher() );
-		;
+		ExpressionArithmetique deu = new ConstEntiere(2);
+		ExpressionArithmetique va  = new VariableSymbolique("x");	
+		ExpressionArithmetique con = new ConstRationnelle(1,2);
+		ExpressionArithmetique ad = new Soustraction(va, con);
+		ExpressionArithmetique mu = new Multiplication(deu,ad);
+		ExpressionArithmetique exx = new Distibutivite(mu);
+		System.out.println(exx.simplifier().afficher());
+		assertEquals("((2*x)-1)",exx.simplifier().afficher() );
+		
 		
 	}
-	@Test 
+	// supporter l’associativité des sommes et des multiplications :   
+	@Test  
 	public void  question17() {
 		
 		ExpressionArithmetique un = new ConstEntiere(1);
 		ExpressionArithmetique x = new VariableSymbolique("x");
 		ExpressionArithmetique add = new Addition(un , x);
-		
 		ExpressionArithmetique mui = new Addition(un,add);
-		assertEquals("(2+x)", mui.simplifier().afficher());
+		
+		System.out.println(mui.simplifier().afficher());
+		assertEquals("(2+x)", mui.simplifier().afficher());           // 1 + (1 + x) = 2 + x
 		
 		ExpressionArithmetique deux = new ConstEntiere(2);
-		ExpressionArithmetique cons =  new ConstRationnelle(1,2);
+		ExpressionArithmetique cons =  new ConstRationnelle(1,2);	
+		ExpressionArithmetique v    = new VariableSymbolique("x");
+		ExpressionArithmetique mul  = new Multiplication(cons, v);
+		ExpressionArithmetique mlk  = new Multiplication(deux,mul);
 		
-		ExpressionArithmetique v = new VariableSymbolique("x");
+	    System.out.println(mlk.simplifier().afficher());
+		assertEquals("x", mlk.simplifier().afficher());               //  2(1/2* x) = x
 		
-		ExpressionArithmetique mul = new Multiplication(cons, v);
-		ExpressionArithmetique mlk = new Multiplication(deux,mul);
-		
-	
-		assertEquals("x", mlk.simplifier().afficher());
-
+                                                       
+ 
 		
 	}
 	 @Test 
@@ -510,12 +510,12 @@ public class AppTest {
         ExpressionArithmetique mulll   = new Multiplication(mull, b);
         ExpressionArithmetique fac     = new Addition(mul,mulll);
         
-        ExpressionArithmetique z = 		new Puissance(b, deux);
-        ExpressionArithmetique k = 		new Multiplication(trois, z);
+        ExpressionArithmetique z	   = new Puissance(b, deux);
+        ExpressionArithmetique k	   = new Multiplication(trois, z);
         ExpressionArithmetique add     = new Addition(fac,k);
-        ExpressionArithmetique l = 		new Factorisation(add);
-        System.out.println(l.simplifier().afficher());
-        
+        ExpressionArithmetique l       = new Factorisation(add);
+        System.out.println();
+        assertEquals("(3*(a+b))^2", l.simplifier().afficher());
       
  }
 		

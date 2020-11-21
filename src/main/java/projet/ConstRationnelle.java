@@ -47,7 +47,7 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	}
 
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
 		return (double) this.getNumerateur() / this.getDenominateur();
 	}
 

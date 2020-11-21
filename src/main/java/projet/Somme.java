@@ -37,12 +37,15 @@ public class Somme implements ExpressionArithmetique{
     @Override
     public String afficher() {
 
-        return this.simplifier().afficher();
+        return this.eaLeft.simplifier().afficher();
     }
 
-    @Override
-    public double calculer(Map<String, ExpressionArithmetique> value) {
-        return 0;
-    }
+  
 
-}
+
+
+	@Override
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
+		return this.eaLeft.calculer(value);
+	}
+	}

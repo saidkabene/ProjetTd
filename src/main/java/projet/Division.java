@@ -10,7 +10,7 @@ public class Division extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value)  {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value)  {
 		return this.eaLeft.calculer(value) / this.eaRight.calculer(value);
 	}
 
@@ -39,6 +39,7 @@ public class Division extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
+		
 		return this;
 	}
 	@Override

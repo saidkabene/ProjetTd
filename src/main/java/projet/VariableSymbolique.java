@@ -1,6 +1,8 @@
 package projet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+
 
 	
 public class VariableSymbolique  implements ExpressionArithmetique{
@@ -38,10 +40,15 @@ public class VariableSymbolique  implements ExpressionArithmetique{
 	}
 	
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
-	
-			return value.get(x).calculer(value);
-	
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> map) {
+		ExpressionArithmetique res = null;
+		for (Entry<VariableSymbolique, ExpressionArithmetique> entry : map.entrySet()) {
+            VariableSymbolique key = entry.getKey();
+            if (key.getX().equals(this.x)) {
+            	res = map.get(key);
+            }
+        }
+		return res.simplifier().calculer(map);
 	}
 
 	public String getX() {
@@ -49,17 +56,18 @@ public class VariableSymbolique  implements ExpressionArithmetique{
 	}
 	
 	@Override
-    public boolean equals(Object obj) {
-        boolean res = false;
-        if (this.getClass().equals(obj.getClass())) {
-            VariableSymbolique var1 = (VariableSymbolique) this;
-            VariableSymbolique var2 = (VariableSymbolique) obj;
-            if (var1.getX() == var2.getX()) {
-                res = true;
-            }
-        }
-        return res;
-    }
+	public boolean equals(Object obj) {
+		boolean res = false;
+		if (this.getClass().equals(obj.getClass())) {
+			VariableSymbolique var1 = (VariableSymbolique) this;
+			VariableSymbolique var2 = (VariableSymbolique) obj;	
+			if (var1.getX() == var2.getX()) {
+				res = true;
+			}
+		}
+		return res;
+	}
+
 	
 	}
 	

@@ -12,7 +12,7 @@ public class ConstanteSymbolique implements ExpressionArithmetique{
 		this.symb = symb;
 	}
 	
-	public double calculer(Map<String, ExpressionArithmetique> value) {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
 		double res = 0;
 		if(this.symb.equals("pi")) {
 			res = Math.PI;

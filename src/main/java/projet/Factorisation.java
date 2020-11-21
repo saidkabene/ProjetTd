@@ -14,54 +14,54 @@ public class Factorisation implements ExpressionArithmetique {
 
 	@Override
 	public ExpressionArithmetique simplifier() {
-	
+		ConstEntiere cons = null;
+		VariableSymbolique b= null;
+		VariableSymbolique a = null;
+		ConstEntiere i = null;;
+		
 		if( this.eaLeft instanceof Addition) {
 			Addition add = (Addition)this.eaLeft;
-			Multiplication mul1 = (Multiplication)add.eaLeft;
-			Multiplication mul2 = (Multiplication)add.eaRight;
-			Multiplication mul = (Multiplication)add.eaRight;
-			ExpressionArithmetique ex = (ExpressionArithmetique)add.eaLeft;
-		
-			if(add.eaLeft instanceof Multiplication && add.eaRight instanceof Multiplication) {
-				;
+			Addition mlk = (Addition)add.eaLeft;
+			Multiplication s = (Multiplication)add.eaRight;
+			if(add.eaLeft instanceof Addition && add.eaRight instanceof Multiplication) {				
 				
-					if( mul1.eaLeft instanceof ConstEntiere && mul1.eaRight instanceof Puissance) {
-					ConstEntiere cons = (ConstEntiere)mul1.eaLeft;
-					Puissance    p    = (Puissance)mul1.eaRight;
-				
-					} 
-					if (mul2.eaLeft instanceof Multiplication && mul2.eaRight instanceof VariableSymbolique ) {
-					Multiplication mul3    = (Multiplication)mul2.eaLeft;
-					VariableSymbolique b = (VariableSymbolique)mul2.eaRight;
-					
-					ConstEntiere c = (ConstEntiere )mul3.eaLeft;
-					VariableSymbolique a =  (VariableSymbolique)mul3.eaRight;
+				if(mlk.eaLeft instanceof Multiplication && mlk.eaRight instanceof Multiplication) {
+					Multiplication k = (Multiplication)mlk.eaLeft;
+					Multiplication j = (Multiplication)mlk.eaRight;
+					if(k.eaLeft instanceof ConstEntiere && k.eaRight instanceof Puissance) {
+						 	cons = (ConstEntiere)k.eaLeft;
+					      Puissance p = (Puissance)k.eaRight;
+					}
+					if(j.eaLeft instanceof Multiplication && j.eaRight instanceof VariableSymbolique) {
+						Multiplication m = (Multiplication)j.eaLeft;
+						 b = (VariableSymbolique)j.eaRight;
+						if(m.eaLeft instanceof ConstEntiere && m.eaRight instanceof VariableSymbolique) {
+							ConstEntiere co = (ConstEntiere)m.eaLeft;
+								a = (VariableSymbolique)m.eaRight;
 					
 					}
-					
-			}
-			else if(add.eaLeft instanceof ExpressionArithmetique && add.eaRight instanceof Multiplication) {
-			
-					
-				    if(mul.eaLeft instanceof ConstEntiere && mul.eaRight instanceof Puissance) {
-				    	
-				    	ConstEntiere c = (ConstEntiere)mul.eaLeft;
-				    	Puissance p = (Puissance)mul.eaRight;	
-				    }
-					
+					if(s.eaLeft instanceof ConstEntiere && s.eaRight instanceof Puissance) {
+						ConstEntiere y = (ConstEntiere)s.eaLeft;
+						 Puissance n = (Puissance)s.eaRight;
+						if(n.eaLeft instanceof VariableSymbolique && n.eaRight instanceof ConstEntiere) {
+							 i = (ConstEntiere)n.eaRight;
+							VariableSymbolique x = (VariableSymbolique)n.eaLeft;
+						}
+					 }
+						
+        		  }
+			   }
 				
-			}
-				
-			return new Addition(ex,mul);			
+			}		
+		}	
 			
-		}
-		return this;
+		return new Puissance(new Multiplication(cons, new Addition(a, b)), i) ;
 	}
 
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
 		
-		return 0;
+		return this.eaLeft.calculer(value);
 	}
 
 	@Override

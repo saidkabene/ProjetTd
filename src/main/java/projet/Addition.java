@@ -114,7 +114,7 @@ public class Addition extends OperationBinaire {
     }
 	
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value)  {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value)  {
 				
 		return this.eaLeft.calculer(value) + this.eaRight.calculer(value);
 				
@@ -122,10 +122,11 @@ public class Addition extends OperationBinaire {
 		
 	@Override
 	public String afficher() {
-		if( this.eaLeft instanceof Addition && this.eaRight instanceof Multiplication ) {
-			
-			return this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() 	;
-		}
+	if (this.eaLeft.simplifier().equals(new ConstEntiere(0))) {
+            return this.eaRight.simplifier().afficher();
+        }else if (this.eaRight.simplifier().equals(new ConstEntiere(0))) {
+            return this.eaLeft.simplifier().afficher();
+        }
 		return "("+this.eaLeft.simplifier().afficher() + "+" + this.eaRight.simplifier().afficher() + ")"	;
 	}
 		

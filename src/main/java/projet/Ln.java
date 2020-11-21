@@ -21,7 +21,7 @@ public class Ln extends OperationUnaire{
 	}
 	
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value)  {
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value)  {
 		
 				return Math.log(this.eaLeft.calculer(value));
 			

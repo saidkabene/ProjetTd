@@ -138,7 +138,9 @@ public class Derivation extends OperationUnaire {
 	
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere c) {
-		return new ConstEntiere(0);
+	
+			return new ConstEntiere(0); 
+	
 	}
 	
 	@Override
@@ -160,8 +162,8 @@ public class Derivation extends OperationUnaire {
 		return res;
 	}
 	@Override
-	public double calculer(Map<String, ExpressionArithmetique> value) {
-		return 0;
+	public double calculer(Map<VariableSymbolique, ExpressionArithmetique> value) {
+		return this.eaLeft.calculer(value);
 	}
 
 

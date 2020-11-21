@@ -80,6 +80,11 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Puissance droite) {
 		return this;
 	}
+
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Soustraction droite) {
+		
+		return this;
+	}
 	
 
 	
@@ -198,6 +203,14 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			Division droite = (Division) this.eaRight;
 			
 			res = this.simplifie(gauche, droite);
+			
+
+		}
+		else if (this.eaLeft instanceof ConstEntiere && this.eaRight instanceof Soustraction) {
+			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
+			Soustraction droite = (Soustraction) this.eaRight;
+			
+			res = this.simplifie(gauche, droite);
 
 		}else if (this.eaLeft instanceof Puissance && this.eaRight instanceof Puissance) {
             Puissance gauche = (Puissance) this.eaLeft;
@@ -216,19 +229,24 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	}
 	@Override
     public boolean equals(Object obj) {
+		boolean res = false ;
         if (this.getClass().equals(obj.getClass())) {
             OperationBinaire op = (OperationBinaire)obj;
                 if(this.eaLeft.simplifier().getClass().equals(op.eaLeft.simplifier().getClass())
-                        && this.eaRight.simplifier().getClass().equals(op.eaRight.simplifier().getClass())) {
+                        && this.eaRight.simplifier().getClass().equals(op.eaRight.simplifier().getClass()) 
 
-                    if (this.eaLeft.simplifier().equals(op.eaLeft.simplifier()) && this.eaRight.simplifier().equals(op.eaRight.simplifier())) {
-                        return true;
-                    }
+                   && this.eaLeft.simplifier().equals(op.eaLeft.simplifier()) && this.eaRight.simplifier().equals(op.eaRight.simplifier())){
+                    	
+                    
+                    res = true;
+             
                 }
 
             }
-        return false;
+        return res;
         }
+
+
 	
 	}
 
